@@ -1,0 +1,23 @@
+section{
+	padding-top: 320px;
+}
+
+section.flat button {
+  color: #331658;
+  background-color: green;
+  text-shadow: -1px 1px #331658;
+  border: none;
+
+}
+
+section.flat button:hover,
+section.flat button.hover {
+  background-color: green;
+  text-shadow: -1px 1px #331658;
+}
+
+section.flat button:active,
+section.flat button.active {
+  background-color: green;
+  text-shadow: -1px 1px #331658;
+}

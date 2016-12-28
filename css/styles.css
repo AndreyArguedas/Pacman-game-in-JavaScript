@@ -1,0 +1,27 @@
+html, body{
+
+	font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Gloria Hallelujah', cursive;
+	padding-bottom: auto;
+	background-image: url("../images/st.gif");
+	height: 100%;
+}
+
+body{
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1{
+	
+	text-decoration;
+	text-shadow: 3px 2px #331658;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	color: green;
+	text-align: center;
+}
+
+
