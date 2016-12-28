@@ -6,9 +6,14 @@ function Ghost(x,y,img){
     this.velocity = 32;
     this.movement = false;
     this.direction = 0;
+    this.isWeak = false;
 
     this.show = function(){
-      image(img,0,0,32,32,this.x,this.y,32,32);
+      if(this.isWeak === false)
+        image(img,0,0,32,32,this.x,this.y,32,32);
+      else {
+        image(weakGhost,0,0,32,32,this.x,this.y,32,32);
+      }
     }
 
     this.move = function(bricks){
@@ -33,8 +38,12 @@ function Ghost(x,y,img){
             this.move(bricks);
           }
         }
-        //this.movement = true;
-        //this.direction = newDirection;
+        this.movement = true;
+        this.direction = newDirection;
+        if(this.x <= -32 )
+            this.x = width-32;
+        else if (this.x >= width)
+            this.x = 0;
     }
 
 

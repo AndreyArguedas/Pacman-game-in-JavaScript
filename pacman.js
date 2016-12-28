@@ -23,11 +23,31 @@ function Pacman(x,y){
           this.y -= this.velocity;
           this.direction = d;
         }
+
+        if(this.x <= -32 )
+            this.x = width-32;
+        else if (this.x >= width)
+            this.x = 0;
+
     }
 
     this.eats = function(food){
       var distance = dist(this.x,this.y,food.x,food.y);
       if(distance < this.radius + food.radius)
+        return true;
+      return false;
+    }
+
+    this.power = function(p){
+      var distance = dist(this.x,this.y,p.x,p.y);
+      if(distance < this.radius + p.radius)
+        return true;
+      return false;
+    }
+
+    this.collision = function(enemy){
+      var distance = dist(this.x,this.y,enemy.x,enemy.y);
+      if(distance < this.radius + enemy.radius)
         return true;
       return false;
     }

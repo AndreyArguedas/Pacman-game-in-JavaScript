@@ -11,8 +11,11 @@ var ghostRedImg;
 var ghostPurpleImg;
 var ghostPinkImg;
 var ghostGreenImg;
+var weakGhost;
 var ghosts = [];
 var activeGhosts = [];
+var powerUps = [];
+var powerUpImg;
 var points = 0;
 
 function preload(){
@@ -23,6 +26,8 @@ function preload(){
   ghostPurpleImg = loadImage("images/purple.png");
   ghostPinkImg = loadImage("images/pink.png");
   ghostGreenImg = loadImage("images/green.png");
+  powerUpImg = loadImage("images/grape.png");
+  weakGhost = loadImage("images/weak.png");
 }
 
 function setup(){
@@ -45,6 +50,8 @@ function setup(){
               ghosts.push(new Ghost(j*32,i*32,ghostGreenImg));
           else if(platform.getElement(i,j) === 'u')
               ghosts.push(new Ghost(j*32,i*32,ghostPurpleImg));
+          else if(platform.getElement(i,j) === 'o')
+              powerUps.push(new Powerup(j*32,i*32));
       }
       activateGhosts();
 
@@ -59,6 +66,15 @@ function draw(){
       foods[i].show();
   for(var i = 0; i < ghosts.length; i++)
       ghosts[i].show();
+  for(var i = 0; i < powerUps.length; i++){
+      powerUps[i].show();
+      if(pacman.power(powerUps[i])){
+        powerUps.splice(i,1);
+        for(var i = 0; i < activeGhosts.length; i++){
+            activeGhosts[i].isWeak = true;
+          }
+      }
+  }
   pacman.show();
     textFont("Comic Sans MS");
     textSize(25);
@@ -68,6 +84,16 @@ function draw(){
   for(var i = 0; i < activeGhosts.length; i++){
       activeGhosts[i].move(bricks);
       activeGhosts[i].show();
+      if(pacman.collision(activeGhosts[i])){
+        if(activeGhosts[i].isWeak === true){
+          activeGhosts.splice(i,1);
+          makeGhostStrong();
+        }
+        else{
+          alert("YOU LOOSE :(");
+          window.location.reload();
+        }
+      }
   }
 }
 
@@ -79,6 +105,12 @@ function activateGhosts(){
     }
     setTimeout(activateGhosts,7000);
 }
+
+function makeGhostStrong(){
+  for(var i = 0; i < activeGhosts.length; i++)
+      activeGhosts[i].isWeak = false;
+}
+
 
 function keyPressed(){
   if(keyCode === RIGHT_ARROW){
