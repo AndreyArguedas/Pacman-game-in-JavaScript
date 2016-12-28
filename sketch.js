@@ -86,6 +86,7 @@ function draw(){
       activeGhosts[i].show();
       if(pacman.collision(activeGhosts[i])){
         if(activeGhosts[i].isWeak === true){
+          ghosts.push(new Ghost(32*12,32*10,activeGhosts[i].img));
           activeGhosts.splice(i,1);
           makeGhostStrong();
         }
@@ -95,6 +96,7 @@ function draw(){
         }
       }
   }
+  checkWin();
 }
 
 function activateGhosts(){
@@ -108,7 +110,15 @@ function activateGhosts(){
 
 function makeGhostStrong(){
   for(var i = 0; i < activeGhosts.length; i++)
-      activeGhosts[i].isWeak = false;
+      activeGhosts[i].isWeak = true;
+}
+
+function checkWin(){
+  print(foods.length);
+  if(foods.length === 0){
+    alert("You win");
+    window.location.reload();
+  }
 }
 
 
